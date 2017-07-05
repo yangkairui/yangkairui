@@ -1,34 +1,16 @@
 ---
 layout: default
-css: ['sidebar-post-nav.css']
 ---
-{% include jumbotron.html %}
-<article class="post container" itemscope itemtype="http://schema.org/BlogPosting">
 
-    <div class="row">
+{% include header.html %}
 
-        {% if page.no-post-nav %}
-        <div class="col-md-12 markdown-body">
-
-            {{ content }}
-
-            <!-- Comments -->
-            {% include disqus-comments.html %}
-        </div>
-        {% else %}
-        <div class="col-md-8 markdown-body">
-
-            {{ content }}
-
-            <!-- Comments -->
-            {% include disqus-comments.html %}
-        </div>
-
-        <div class="col-md-4">
-            {% include sidebar-post-nav.html %}
-        </div>
-        {% endif %}
-
-    </div>
-
-</article>
+<div class="content post">
+  <h1 class="post-title">{{ page.title }}</h1>
+  <div class="post-date">
+    <time>{{ page.date | date_to_string }}</time>
+  </div>
+  {{ content }}
+</div>
+{% if site.disqus_shortname %}
+  {% include disqus_comments.html %}
+{% endif %}

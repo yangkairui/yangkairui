@@ -1,66 +1,38 @@
 ---
-layout: default
-menu: home
-css: ['index.css', 'sidebar-popular-repo.css']
+layout: default 
 ---
-<section class="jumbotron">
-    <div class="container">
-        <h1>{{ site.title }}</h1>
-        <div id="jumbotron-meta-info">
-            {% if site.location %}
-            <span class="meta-info">
-                <span class="octicon octicon-location"></span>
-                {{ site.location }}
-            </span> {% endif %}
-            {% if site.company %}
-            <span class="meta-info hvr-grow">
-                <span class="octicon octicon-organization"></span>
-                <a href="{{ site.company_url }}" target="_blank">{{ site.company }}</a>
-            </span> {% endif %}
-            {% if site.github_url %}
-            <span class="meta-info hvr-grow">
-                <span class="octicon octicon-mark-github"></span>
-                <a href="{{ site.github_url }}" target="_blank">@{{ site.name }}</a>
-            </span> {% endif %}
+<header class="bloghead">
+    <h1 class="bloghead-title">
+    <a href="{{ site.url }}/">{{ site.name }}<span>&#39;s blog</span></a>
+  </h1>
+    <nav class="bloghead-nav">
+        {% for nav in site.nav %}
+        <a href="{{ nav.href }}">{{ nav.name }}<span> &nbsp;/&nbsp; </span></a> {% endfor %}
+    </nav>
+</header>
+<div class="content">
+    {% if site.posts.size == 0 %}
+    <h2>No post found</h2> {% else %} {% for post in paginator.posts %}
+    <div class="post-list">
+        <h2 class="post-title">
+      <a href="{{ post.url }}">{{ post.title }}</a>
+    </h2> {% if post.description %}
+        <p>{{ post.description }}</p>
+        {% endif %}
+        <div class="post-date">
+            <time>{{ post.date | date_to_string }}</time>
         </div>
     </div>
-</section>
-<section class="content container">
+    {% endfor %} {% if paginator.total_pages > 1 %}
+    <div class="pages">
+      {% if paginator.previous_page %}
+        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}"><</a>
+      {% endif %}
 
-    <div class="row">
-
-        <!-- Post List -->
-        <div class="col-md-8">
-
-            <ol class="post-list">
-                {% for post in paginator.posts %}
-                <li class="post-list-item">
-                    <h2 class="post-list-title">
-                        <a class="hvr-underline-from-center" href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
-                    </h2>
-                    <p class="post-list-description">
-                        {{ post.excerpt | strip_html | strip }}
-                    </p>
-                    <p class="post-list-meta">
-                        <span class="octicon octicon-calendar"></span> {{ post.date | date: "%Y/%m/%d" }}
-                    </p>
-                </li>
-                {% endfor %}
-            </ol>
-
-            <!-- Pagination -->
-            {% include pagination.html %}
-
-            <!-- Comments -->
-            {% include disqus-comments.html %}
-
-        </div>
-
-        <div class="col-md-4">
-            {% include sidebar-popular-repo.html %}
-        </div>
-
+      {% if paginator.next_page %}
+        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">></a>
+      {% endif %}
     </div>
-
-</section>
-
+    {% endif %}
+  {% endif %}
+</div>
