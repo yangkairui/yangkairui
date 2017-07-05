@@ -1,20 +1,20 @@
 # Site settings
-title: Your awesome title
-email: your-email@domain.com
+title: 鼻子听不见的听不见
+email: hehecarry@gmail.com
 baseurl: "" # the subpath of your site, e.g. /blog
 #url: "http://yourdomain.com" # the base hostname & protocol for your site
 
 # Sidebar settings
-description: One sentence introducing yourself or what you do
+description: 能与诸葛孔明斗上一二的，就只有在下了
 
 # Social icons
 facebook: username
 linkedin: username
-github: username
+github: https://github.com/yangkairui
 deviantart: username
 codepen: username
 
-footer: © Taken theme
+footer: 无影无踪
 
 # Build settings
 markdown: kramdown
